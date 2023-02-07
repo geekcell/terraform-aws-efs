@@ -78,7 +78,7 @@ No outputs.
 - data source.aws_iam_policy_document.main (data.tf#3)
 
 # Examples
-### Full
+### Basic Example
 ```hcl
 module "basic-example" {
   source = "../../"
@@ -86,6 +86,18 @@ module "basic-example" {
   name            = "efs1"
   private_subnets = ["subnet-12345678", "subnet-12345678"]
   security_groups = ["sg-12345678"]
+}
+```
+### with enhanced Backups
+```hcl
+module "with-enhanced-backups" {
+  source = "../../"
+
+  name            = "efs1"
+  private_subnets = ["subnet-12345678", "subnet-12345678"]
+  security_groups = ["sg-12345678"]
+
+  enable_enhanced_backups = true
 }
 ```
 <!-- END_TF_DOCS -->
