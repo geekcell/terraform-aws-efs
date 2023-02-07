@@ -38,7 +38,24 @@ Comment in these badges if they apply to the repository.
 
 -->
 
+# Terraform AWS EFS
 
+This Terraform module provides a preconfigured solution for setting up+
+AWS EFS file systems in your AWS account. With this module, you can easily
+and efficiently create and manage EFS file systems with advanced features
+such as encryption and lifecycle policies for cold storage, as well as
+extended backup options. Our team has extensive experience working with
+AWS EFS and has optimized this module to provide the best possible experience
+for users.
+
+By using this Terraform module, you can save time and effort in setting up
+and managing your EFS file systems, as well as ensure that your data is
+secure and protected. The module encapsulates all necessary configurations,
+making it easy to use and integrate into your existing AWS environment.
+Whether you are just getting started with AWS EFS or looking for a more
+efficient way to manage your file systems, this Terraform module provides
+a preconfigured solution with advanced features such as encryption and
+extended backup options.
 
 ## Inputs
 
@@ -70,10 +87,10 @@ No outputs.
 
 ## Resources
 
-- resource.aws_efs_file_system.main (main.tf#1)
-- resource.aws_efs_file_system_policy.main (main.tf#44)
-- resource.aws_efs_mount_target.main (main.tf#37)
-- resource.random_uuid.main (main.tf#53)
+- resource.aws_efs_file_system.main (main.tf#22)
+- resource.aws_efs_file_system_policy.main (main.tf#65)
+- resource.aws_efs_mount_target.main (main.tf#58)
+- resource.random_uuid.main (main.tf#74)
 - data source.aws_caller_identity.current (data.tf#1)
 - data source.aws_iam_policy_document.main (data.tf#3)
 
