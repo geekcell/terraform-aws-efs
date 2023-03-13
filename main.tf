@@ -1,3 +1,24 @@
+/**
+ * # Terraform AWS EFS
+ *
+ * This Terraform module provides a preconfigured solution for setting up+
+ * AWS EFS file systems in your AWS account. With this module, you can easily
+ * and efficiently create and manage EFS file systems with advanced features
+ * such as encryption and lifecycle policies for cold storage, as well as
+ * extended backup options. Our team has extensive experience working with
+ * AWS EFS and has optimized this module to provide the best possible experience
+ * for users.
+ *
+ * By using this Terraform module, you can save time and effort in setting up
+ * and managing your EFS file systems, as well as ensure that your data is
+ * secure and protected. The module encapsulates all necessary configurations,
+ * making it easy to use and integrate into your existing AWS environment.
+ * Whether you are just getting started with AWS EFS or looking for a more
+ * efficient way to manage your file systems, this Terraform module provides
+ * a preconfigured solution with advanced features such as encryption and
+ * extended backup options.
+ *
+ */
 resource "aws_efs_file_system" "main" {
 
   # Creation token
