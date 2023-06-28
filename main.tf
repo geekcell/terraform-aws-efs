@@ -53,8 +53,10 @@ resource "aws_efs_file_system_policy" "main" {
 resource "random_uuid" "main" {}
 
 module "backup" {
-  count  = var.enable_enhanced_backups ? 1 : 0
-  source = "github.com/geekcell/terraform-aws-backup?ref=v1.0"
+  count = var.enable_enhanced_backups ? 1 : 0
+
+  source  = "geekcell/backup/aws"
+  version = ">= 1.0.0, < 2.0.0"
 
   vault_name  = var.name
   backup_name = var.name
@@ -67,7 +69,8 @@ module "backup" {
 }
 
 module "kms" {
-  source = "github.com/geekcell/terraform-aws-kms?ref=v1.0"
+  source  = "geekcell/kms/aws"
+  version = ">= 1.0.0, < 2.0.0"
 
   alias = format("alias/efs/%s", var.name)
 }

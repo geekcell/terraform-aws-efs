@@ -1,8 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-[![Geek Cell GmbH](https://raw.githubusercontent.com/geekcell/template-terraform-module/main/docs/assets/logo.svg)](https://www.geekcell.io/)
-
-<!--
-Comment in these badges if they apply to the repository.
+[![Geek Cell GmbH](https://raw.githubusercontent.com/geekcell/.github/main/geekcell-github-banner.png)](https://www.geekcell.io/)
 
 ### Code Quality
 [![License](https://img.shields.io/github/license/geekcell/terraform-aws-efs)](https://github.com/geekcell/terraform-aws-efs/blob/master/LICENSE)
@@ -10,6 +7,9 @@ Comment in these badges if they apply to the repository.
 [![Release](https://github.com/geekcell/terraform-aws-efs/actions/workflows/release.yaml/badge.svg)](https://github.com/geekcell/terraform-aws-efs/actions/workflows/release.yaml)
 [![Validate](https://github.com/geekcell/terraform-aws-efs/actions/workflows/validate.yaml/badge.svg)](https://github.com/geekcell/terraform-aws-efs/actions/workflows/validate.yaml)
 [![Lint](https://github.com/geekcell/terraform-aws-efs/actions/workflows/linter.yaml/badge.svg)](https://github.com/geekcell/terraform-aws-efs/actions/workflows/linter.yaml)
+
+<!--
+Comment in these badges if they apply to the repository.
 
 ### Security
 [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/geekcell/terraform-aws-efs/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=geekcell%2Fterraform-aws-efs&benchmark=INFRASTRUCTURE+SECURITY)
@@ -88,6 +88,7 @@ module "basic-example" {
   security_groups = ["sg-12345678"]
 }
 ```
+
 ### with enhanced Backups
 ```hcl
 module "with-enhanced-backups" {
