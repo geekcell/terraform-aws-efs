@@ -1,7 +1,8 @@
 module "basic-example" {
   source = "../../"
 
-  name            = "efs1"
-  private_subnets = ["subnet-12345678", "subnet-12345678"]
-  security_groups = ["sg-12345678"]
+  name = var.storage_name
+
+  private_subnets = var.private_subnets
+  security_groups = var.security_groups
 }
