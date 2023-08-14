@@ -35,15 +35,14 @@ resource "aws_efs_file_system" "main" {
 }
 
 resource "aws_efs_mount_target" "main" {
-  for_each        = toset(var.private_subnets)
+  count           = length(var.private_subnets)
   file_system_id  = aws_efs_file_system.main.id
   security_groups = var.security_groups
-  subnet_id       = each.value
+  subnet_id       = var.private_subnets[count.index]
 }
 
 resource "aws_efs_file_system_policy" "main" {
   file_system_id = aws_efs_file_system.main.id
-
 
   bypass_policy_lockout_safety_check = var.bypass_policy_lockout_safety_check
 
