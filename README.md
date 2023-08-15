@@ -59,7 +59,14 @@ Comment in these badges if they apply to the repository.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_arn"></a> [arn](#output\_arn) | ARN of filesystem. |
+| <a name="output_dns_name"></a> [dns\_name](#output\_dns\_name) | DNS address of filesystem. |
+| <a name="output_id"></a> [id](#output\_id) | Id of filesystem. |
+| <a name="output_kms_key_id"></a> [kms\_key\_id](#output\_kms\_key\_id) | DNS address of filesystem. |
+| <a name="output_number_of_mount_targets"></a> [number\_of\_mount\_targets](#output\_number\_of\_mount\_targets) | DNS address of filesystem. |
+| <a name="output_size_in_bytes"></a> [size\_in\_bytes](#output\_size\_in\_bytes) | DNS address of filesystem. |
 
 ## Providers
 
