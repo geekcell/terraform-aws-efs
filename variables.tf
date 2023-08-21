@@ -68,3 +68,9 @@ variable "transition_to_primary_storage_class" {
   description = "Describes the policy used to transition a file from infequent access storage to primary storage. Only AFTER_1_ACCESS is accepted"
   type        = string
 }
+
+variable "accessors_read_write" {
+  default     = []
+  description = "List of accessors that are allowed to read & write."
+  type        = list(string)
+}
