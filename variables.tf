@@ -105,7 +105,7 @@ variable "access_points" {
 
 variable "aws_iam_principals" {
   description = "AWS IAM principals which will be allowed to access the file system via the EFS policy."
-  default     = []
+  default     = ["*"]
   type        = list(string)
 }
 
