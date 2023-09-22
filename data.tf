@@ -1,28 +1,50 @@
-data "aws_caller_identity" "current" {}
-
 data "aws_iam_policy_document" "main" {
-  statement {
-    sid       = "Allow Access to EFS"
-    effect    = "Allow"
-    resources = [aws_efs_file_system.main.arn]
+  dynamic "statement" {
+    for_each = [true]
 
-    actions = [
-      "elasticfilesystem:ClientMount",
-      "elasticfilesystem:ClientWrite",
-    ]
+    content {
+      sid       = "AccessRules"
+      resources = [aws_efs_file_system.main.arn]
+      effect    = "Allow"
 
-    condition {
-      test     = "Bool"
-      variable = "aws:SecureTransport"
-      values   = ["true"]
+      principals {
+        type        = "AWS"
+        identifiers = var.aws_iam_principals
+      }
+
+      actions = compact([
+        !var.prevent_root_access_default ? "elasticfilesystem:ClientRootAccess" : null,
+        !var.enforce_read_only_default ? "elasticfilesystem:ClientWrite" : null,
+        !var.prevent_anonymous_access ? "elasticfilesystem:ClientMount" : null,
+      ])
+
+      condition {
+        test     = "Bool"
+        variable = "elasticfilesystem:AccessedViaMountTarget"
+        values   = ["true"]
+      }
     }
+  }
 
-    principals {
-      type = "AWS"
-      identifiers = concat(
-        ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"],
-        var.accessors_read_write
-      )
+  dynamic "statement" {
+    for_each = var.enforce_transit_encryption ? [true] : []
+
+    content {
+      sid       = "EnforceInTransitEncryption"
+      resources = [aws_efs_file_system.main.arn]
+      effect    = "Deny"
+      actions   = ["*"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "Bool"
+        variable = "aws:SecureTransport"
+        values   = ["false"]
+      }
     }
   }
 }

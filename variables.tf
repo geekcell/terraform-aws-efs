@@ -24,6 +24,18 @@ variable "encrypted" {
   type        = bool
 }
 
+variable "kms_key_id" {
+  description = "The ARN of the AWS KMS to encrypt the file system. Defaults to the AWS managed KMS key."
+  default     = null
+  type        = string
+}
+
+variable "enable_customer_managed_kms" {
+  description = "If enabled, will create a customer managed KMS key for at-rest encryption."
+  default     = false
+  type        = bool
+}
+
 variable "name" {
   description = "The name of the file system."
   type        = string
@@ -69,8 +81,54 @@ variable "transition_to_primary_storage_class" {
   type        = string
 }
 
-variable "accessors_read_write" {
+variable "access_points" {
+  default     = {}
+  description = "List of access points to create."
+  type = map(object({
+    posix_user = optional(object({
+      gid            = number
+      uid            = number
+      secondary_gids = optional(list(number))
+    }))
+
+    root_directory = optional(object({
+      path = string
+
+      creation_info = optional(object({
+        owner_gid   = number
+        owner_uid   = number
+        permissions = string
+      }))
+    }))
+  }))
+}
+
+variable "aws_iam_principals" {
+  description = "AWS IAM principals which will be allowed to access the file system via the EFS policy."
   default     = []
-  description = "List of accessors that are allowed to read & write."
   type        = list(string)
+}
+
+variable "prevent_root_access_default" {
+  description = "Prevent root access to the file system. Identity-based policies can override these default permissions."
+  default     = false
+  type        = bool
+}
+
+variable "enforce_read_only_default" {
+  description = "Enforce read-only access to the file system. Identity-based policies can override these default permissions."
+  default     = false
+  type        = bool
+}
+
+variable "prevent_anonymous_access" {
+  description = "Prevent anonymous access to the file system."
+  default     = false
+  type        = bool
+}
+
+variable "enforce_transit_encryption" {
+  description = "Enforce in-transit encryption for all clients."
+  default     = true
+  type        = bool
 }

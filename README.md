@@ -44,12 +44,19 @@ Comment in these badges if they apply to the repository.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_accessors_read_write"></a> [accessors\_read\_write](#input\_accessors\_read\_write) | List of accessors that are allowed to read & write. | `list(string)` | `[]` | no |
+| <a name="input_access_points"></a> [access\_points](#input\_access\_points) | List of access points to create. | <pre>map(object({<br>    posix_user = optional(object({<br>      gid            = number<br>      uid            = number<br>      secondary_gids = optional(list(number))<br>    }))<br><br>    root_directory = optional(object({<br>      path = string<br><br>      creation_info = optional(object({<br>        owner_gid   = number<br>        owner_uid   = number<br>        permissions = string<br>      }))<br>    }))<br>  }))</pre> | `{}` | no |
+| <a name="input_aws_iam_principals"></a> [aws\_iam\_principals](#input\_aws\_iam\_principals) | AWS IAM principals which will be allowed to access the file system via the EFS policy. | `list(string)` | `[]` | no |
 | <a name="input_bypass_policy_lockout_safety_check"></a> [bypass\_policy\_lockout\_safety\_check](#input\_bypass\_policy\_lockout\_safety\_check) | A flag to indicate whether to bypass the aws\_efs\_file\_system\_policy lockout safety check. | `bool` | `false` | no |
+| <a name="input_enable_customer_managed_kms"></a> [enable\_customer\_managed\_kms](#input\_enable\_customer\_managed\_kms) | If enabled, will create a customer managed KMS key for at-rest encryption. | `bool` | `false` | no |
 | <a name="input_enable_enhanced_backups"></a> [enable\_enhanced\_backups](#input\_enable\_enhanced\_backups) | Enable enhanced backups. | `bool` | `false` | no |
 | <a name="input_encrypted"></a> [encrypted](#input\_encrypted) | If true, the disk will be encrypted. | `bool` | `true` | no |
+| <a name="input_enforce_read_only_default"></a> [enforce\_read\_only\_default](#input\_enforce\_read\_only\_default) | Enforce read-only access to the file system. Identity-based policies can override these default permissions. | `bool` | `false` | no |
+| <a name="input_enforce_transit_encryption"></a> [enforce\_transit\_encryption](#input\_enforce\_transit\_encryption) | Enforce in-transit encryption for all clients. | `bool` | `true` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | The ARN of the AWS KMS to encrypt the file system. Defaults to the AWS managed KMS key. | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the file system. | `string` | n/a | yes |
 | <a name="input_performance_mode"></a> [performance\_mode](#input\_performance\_mode) | The file system performance mode. Can be either `generalPurpose` or `maxIO`. | `string` | `"generalPurpose"` | no |
+| <a name="input_prevent_anonymous_access"></a> [prevent\_anonymous\_access](#input\_prevent\_anonymous\_access) | Prevent anonymous access to the file system. | `bool` | `false` | no |
+| <a name="input_prevent_root_access_default"></a> [prevent\_root\_access\_default](#input\_prevent\_root\_access\_default) | Prevent root access to the file system. Identity-based policies can override these default permissions. | `bool` | `false` | no |
 | <a name="input_private_subnets"></a> [private\_subnets](#input\_private\_subnets) | A list of private subnets inside the VPC. | `list(string)` | n/a | yes |
 | <a name="input_provisioned_throughput_in_mibps"></a> [provisioned\_throughput\_in\_mibps](#input\_provisioned\_throughput\_in\_mibps) | The throughput, measured in MiB/s, that you want to provision for the file system. | `number` | `0` | no |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | A list of security group IDs to associate with the file system. | `list(string)` | n/a | yes |
@@ -78,12 +85,12 @@ Comment in these badges if they apply to the repository.
 
 ## Resources
 
-- resource.aws_efs_file_system.main (main.tf#1)
-- resource.aws_efs_file_system_policy.main (main.tf#44)
-- resource.aws_efs_mount_target.main (main.tf#37)
-- resource.random_uuid.main (main.tf#52)
-- data source.aws_caller_identity.current (data.tf#1)
-- data source.aws_iam_policy_document.main (data.tf#3)
+- resource.aws_efs_access_point.main (main.tf#44)
+- resource.aws_efs_file_system.main (main.tf#3)
+- resource.aws_efs_file_system_policy.main (main.tf#37)
+- resource.aws_efs_mount_target.main (main.tf#28)
+- resource.random_uuid.main (main.tf#1)
+- data source.aws_iam_policy_document.main (data.tf#1)
 
 # Examples
 ### Basic Example
