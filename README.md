@@ -61,7 +61,8 @@ Comment in these badges if they apply to the repository.
 | <a name="input_provisioned_throughput_in_mibps"></a> [provisioned\_throughput\_in\_mibps](#input\_provisioned\_throughput\_in\_mibps) | The throughput, measured in MiB/s, that you want to provision for the file system. | `number` | `0` | no |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | A list of security group IDs to associate with the file system. | `list(string)` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to all resources. | `map(string)` | `{}` | no |
-| <a name="input_throughput_mode"></a> [throughput\_mode](#input\_throughput\_mode) | Throughput mode for the file system. Defaults to bursting. | `string` | `"bursting"` | no |
+| <a name="input_throughput_mode"></a> [throughput\_mode](#input\_throughput\_mode) | Throughput mode for the file system. Valid values: `bursting`, `provisioned`, or `elastic`. | `string` | `"elastic"` | no |
+| <a name="input_transition_to_archive"></a> [transition\_to\_archive](#input\_transition\_to\_archive) | Indicates how long it takes to transition files to the archive storage class. Accepted values AFTER\_7\_DAYS, AFTER\_14\_DAYS, AFTER\_30\_DAYS, AFTER\_60\_DAYS, AFTER\_90\_DAYS. | `string` | `"AFTER_90_DAYS"` | no |
 | <a name="input_transition_to_ia"></a> [transition\_to\_ia](#input\_transition\_to\_ia) | Indicates how long it takes to transition files to the IA storage class. Accepted values AFTER\_7\_DAYS, AFTER\_14\_DAYS, AFTER\_30\_DAYS, AFTER\_60\_DAYS, AFTER\_90\_DAYS. | `string` | `"AFTER_30_DAYS"` | no |
 | <a name="input_transition_to_primary_storage_class"></a> [transition\_to\_primary\_storage\_class](#input\_transition\_to\_primary\_storage\_class) | Describes the policy used to transition a file from infequent access storage to primary storage. Only AFTER\_1\_ACCESS is accepted | `string` | `"AFTER_1_ACCESS"` | no |
 
@@ -82,15 +83,15 @@ Comment in these badges if they apply to the repository.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.36 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.35 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 3.4 |
 
 ## Resources
 
-- resource.aws_efs_access_point.main (main.tf#44)
+- resource.aws_efs_access_point.main (main.tf#48)
 - resource.aws_efs_file_system.main (main.tf#3)
-- resource.aws_efs_file_system_policy.main (main.tf#37)
-- resource.aws_efs_mount_target.main (main.tf#28)
+- resource.aws_efs_file_system_policy.main (main.tf#41)
+- resource.aws_efs_mount_target.main (main.tf#32)
 - resource.random_uuid.main (main.tf#1)
 - data source.aws_iam_policy_document.main (data.tf#1)
 
