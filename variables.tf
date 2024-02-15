@@ -64,8 +64,8 @@ variable "security_groups" {
 }
 
 variable "throughput_mode" {
-  default     = "bursting"
-  description = "Throughput mode for the file system. Defaults to bursting."
+  default     = "elastic"
+  description = "Throughput mode for the file system. Valid values: `bursting`, `provisioned`, or `elastic`."
   type        = string
 }
 
@@ -78,6 +78,12 @@ variable "transition_to_ia" {
 variable "transition_to_primary_storage_class" {
   default     = "AFTER_1_ACCESS"
   description = "Describes the policy used to transition a file from infequent access storage to primary storage. Only AFTER_1_ACCESS is accepted"
+  type        = string
+}
+
+variable "transition_to_archive" {
+  default     = "AFTER_90_DAYS"
+  description = "Indicates how long it takes to transition files to the archive storage class. Accepted values AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS."
   type        = string
 }
 

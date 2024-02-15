@@ -17,6 +17,10 @@ resource "aws_efs_file_system" "main" {
   }
 
   lifecycle_policy {
+    transition_to_archive = var.transition_to_archive
+  }
+
+  lifecycle_policy {
     transition_to_primary_storage_class = var.transition_to_primary_storage_class
   }
 
